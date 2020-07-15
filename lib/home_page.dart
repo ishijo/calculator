@@ -8,15 +8,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   
-  final TextEditingController t1=new TextEditingController(text: "0");
+  final TextEditingController t1=new TextEditingController(text: "0");  //HAVE TO DO SOMETHING ABOUT THE STRING DATATYPE THING HERE
   final TextEditingController t2=new TextEditingController(text: "0");
 
-  var n1=0.0,n2=0.0,sum=0.0,diff,prod,quot;
+  var n1=0.0,n2=0.0,action=0.0,diff,prod,quot;
   void addSum(){
     setState(() {
       n1=double.parse(t1.text);
       n2=double.parse(t2.text);
-      sum=n1+n2;
+      action=n1+n2;
     });
   }
 
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       n1=double.parse(t1.text);
       n2=double.parse(t2.text);
-      sum=n1-n2;
+      action=n1-n2;
     });
   }
 
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       n1=double.parse(t1.text);
       n2=double.parse(t2.text);
-      sum=n1*n2;
+      action=n1*n2;
     });
   }
 
@@ -40,7 +40,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       n1=double.parse(t1.text);
       n2=double.parse(t2.text);
-      sum=n1/n2;
+      action=n1/n2;
+    });
+  }
+  
+  void clear(){
+    setState(() {
+      n1=double.parse(t1.text='0');
+      n2=double.parse(t2.text='0');
+      n1=0.0;
+      n2=0.0;
+      action=0.0;
     });
   }
   
@@ -172,13 +182,43 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             new Text(
-              "Output : $sum",
+              "Output : $action",
               style: new TextStyle(
                   fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.lime
               ),
-            )
+            ),
+          SizedBox(
+            height: 10,
+          ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              ButtonTheme(
+                minWidth:240,
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new RaisedButton(
+                    child: new Text('Clear', style: new TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold
+                    ),),
+
+                    onPressed: clear,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(
+                            color: Colors.black,
+                            width: 1
+                        )
+                    ),
+                    color: Colors.amber[200],
+                  ),
+                ))
+            ],
+      )
         ]),
       ),
     ),
